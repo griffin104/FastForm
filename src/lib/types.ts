@@ -31,7 +31,7 @@ export type formStoreType = {
         min: number
     ) => void
     customValidator: (
-      func: (store: formStoreValueType) => formStoreValueType
+      func: (store: formStoreValueType) => Promise<formStoreValueType>
     ) => void
 }
 
@@ -40,5 +40,5 @@ export type validateType = {
   mustMatch: (field: string, fieldToMatch: string)=>void,
   minNumOptions: (field:string, min:number)=>void,
   maxNumOptions: (field:string, min:number)=>void,
-  customValidator: (func: (store: formStoreValueType) => formStoreValueType)=>void
+  customValidator: (func: (store: formStoreValueType) => Promise<formStoreValueType>)=>void
 }

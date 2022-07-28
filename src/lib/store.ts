@@ -28,9 +28,14 @@ export const formStore = writable({
       mustMatch: (field, fieldToMatch) => update(store => mustMatch(field, fieldToMatch, store)),
       minNumOptions: (field, min) => update(store => minNumOptions(field, min, store)),
       maxNumOptions: (field, max) => update(store => maxNumOptions(field, max, store)),
-      customValidator: (func) => update(store => func(store))
+      customValidator: async (func) => await update((store) => test(store, func))
     };
   }
-  
+
+  async function test(store:formStoreValueType, func:(store: formStoreValueType) => Promise<formStoreValueType>) {
+    const res = await func(store)
+    return res
+  }
+
   export const formStore = createFormStore();
   

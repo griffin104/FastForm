@@ -17,15 +17,14 @@
 <FastForm 
 initValues={initValues} 
 handleSubmit={handleSubmit}
-validate = {({values, errors, required, mustMatch, minNumOptions, maxNumOptions, customValidator}) => {
+validate = {async ({values, errors, required, mustMatch, minNumOptions, maxNumOptions, customValidator}) => {
   mustMatch('name', 'name2')
   maxNumOptions('icecream', 2)
   minNumOptions('icecream', 1)
-  customValidator(({values, errors}) => {
-    if (errors.name) {
-      errors.custom ??= {}
-      errors.custom.custom = 'Some message'
-    }
+  await customValidator(async ({values, errors}) => {
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+    const data = await res.json()
+    errors.pokemon = 'fsdjkhgdsf'
     return {
       values,
       errors

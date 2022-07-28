@@ -16,11 +16,11 @@
     }
 
     //on submit, run the validator function first before running the handleSubmit;
-    function onSubmit(){
+    async function onSubmit(){
         //When a validator function is passed in, run the validator function;
         if (typeof validate === 'function'){
         $formStore.errors = {}
-        validate({
+        await validate({
           required: formStore.required,
           mustMatch: formStore.mustMatch,
           minNumOptions: formStore.minNumOptions,
